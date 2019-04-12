@@ -1,0 +1,65 @@
+{
+    "reshape_0":{
+        "type":"reshape",
+        "param":["shape":[40,40]],
+        "inputs":null,
+        "outputs":["reshape_0:0"]
+    },
+    "conv2d_0":{
+        "type":"conv2d",
+        "param":["knl_h":3, "knl_w":3,
+                 "pad_l":0, "pad_r":0,
+                 "pad_t":0, "pad_b":0,
+                 "stride_h":1, "stride_w":1,
+                 "ifm_num":1, "ofm_num":32,
+                 "activation":"relu"],
+        "inputs":["reshape_0:0"],
+        "outputs":["conv2d_0:0"]
+    },
+    "add_0":{
+        "type":"add",
+        "param":null,
+        "inputs":["conv2d_1:0","conv2d_2:0"],
+        "outputs":["add_0:0"]
+    },
+    "conv2d_1":{
+        "type":"conv2d",
+        "param":["knl_h":3, "knl_w":3,
+                 "pad_l":0, "pad_r":0,
+                 "pad_t":0, "pad_b":0,
+                 "stride_h":1, "stride_w":1,
+                 "ifm_num":32, "ofm_num":32,
+                 "activation":"relu"],
+        "inputs":["conv2d_0:0"],
+        "outputs":["conv2d_1:0"]
+    },
+    "conv2d_2":{
+        "type":"conv2d",
+        "param":["knl_h":3, "knl_w":3,
+                 "pad_l":0, "pad_r":0,
+                 "pad_t":0, "pad_b":0,
+                 "stride_h":1, "stride_w":1,
+                 "ifm_num":32, "ofm_num":32,
+                 "activation":"relu"],
+        "inputs":["conv2d_1:0"],
+        "outputs":["conv2d_2:0"]
+    },
+    "reshape_1":{
+        "type":"reshape",
+        "param":["shape":[1,128]],
+        "inputs":["add_0:0"],
+        "outputs":["reshape_1:0"]
+    },
+    "fc_0":{
+        "type":"fullcon",
+        "param":["w_size":[20,128]],
+        "inputs":["reshape_1:0"],
+        "outputs":["fc_0:0"]
+    },
+    "softmax_0":{
+        "type":"softmax",
+        "param":null,
+        "inputs":["fc_0:0"],
+        "outputs":["softmax_0:0"]
+    }
+}
